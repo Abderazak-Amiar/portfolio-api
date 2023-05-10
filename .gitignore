@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 #credentials
-credentials.json
+/credentials.json
