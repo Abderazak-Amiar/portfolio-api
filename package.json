@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "googleapis": "^105.0.0",
+    "mongoose": "^7.1.0",
+    "nodemailer": "^6.9.1"
+  },
+  "name": "portfolioapi",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
