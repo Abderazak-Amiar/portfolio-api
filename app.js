@@ -53,7 +53,7 @@ app.route("/skill")
   link : req.body.link,
   icon : req.body.icon
 }
-
+console.log(req.body);
 const newSkill = new Skill(skill);
 newSkill.save();
 res.send(skill);
