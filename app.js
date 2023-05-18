@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const cors = require('cors');
 const mongoose = require('mongoose');
+const multer = require("multer");
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -15,6 +16,18 @@ app.use(express.static("public"));
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
+console.log("===>", __dirname);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname+'/public/uploads/images')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix+'.'+file.mimetype.split('/')[1])
+  }
+})
+
+const upload = multer({ storage: storage })
 
 mongoose.connect("mongodb+srv://zak:19081990ok@cluster0.joytwex.mongodb.net/portfolioDB").then(msg=>{
 console.log("Connected successesfully");
@@ -166,7 +179,14 @@ app.route("/portfolio/:id")
   });
 });
 
+//UPLOADS ROUTE
 
+app.route("/upload")
+.post(upload.single('image'),(req, res)=>{
+  res.send("file uploaded !");
+  console.log(req.file);
+
+})
 
 
 
