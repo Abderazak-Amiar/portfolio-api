@@ -5,6 +5,7 @@ const ejs = require("ejs");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require("multer");
+var path = require('path');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -12,18 +13,23 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
+//app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
 console.log("===>", __dirname);
+
+let imageLink = "";
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname+'/public/uploads/images')
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix+'.'+file.mimetype.split('/')[1])
+    const uniqueSuffix = Date.now()
+    cb(null, uniqueSuffix+'.'+file.mimetype.split('/')[1])
+    imageLink = uniqueSuffix+'.'+file.mimetype.split('/')[1];
   }
 })
 
@@ -135,7 +141,7 @@ app.route("/portfolio")
    title : req.body.title,
    content : req.body.content,
    link : req.body.link,
-   image : req.body.image
+   image : imageLink,
  }
  const newPortfolioItem = new Portfolio(portfolio);
  newPortfolioItem.save();
@@ -186,7 +192,9 @@ app.route("/upload")
   res.send("file uploaded !");
   console.log(req.file);
 
-})
+});
+
+
 
 
 

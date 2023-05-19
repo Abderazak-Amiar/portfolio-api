@@ -22,7 +22,7 @@ module.exports = function sendToGmail(message){
           clientId : process.env.CLIENT_ID,
           clientSecret : process.env.CLIENT_SECRET,
           refreshToken : process.env.GMAIL_REFRESH_TOKEN,
-          accessToken : ACCESS_TOKEN,
+          accessToken : process.env.GMAIL_ACCESS_TOKEN,
         }
       });
     
