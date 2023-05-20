@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require("multer");
 var path = require('path');
+const { log } = require('console');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -18,7 +19,6 @@ app.use(express.static("public"));
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
-console.log("===>", __dirname);
 
 let imageLink = "";
 
@@ -72,7 +72,6 @@ app.route("/skill")
   link : req.body.link,
   icon : req.body.icon
 }
-console.log(req.body);
 const newSkill = new Skill(skill);
 newSkill.save();
 res.send(skill);
@@ -84,6 +83,7 @@ res.send(skill);
     res.send(err);
   });
 })
+
 //FIND ONE SKILL
 app.route("/skill/:id")
 .get((req, res)=>{
@@ -101,7 +101,6 @@ app.route("/skill/:id")
   const id = req.params.id;
 
   Skill.deleteOne({_id : id}).then(msg =>{
-    console.log("==> DELETED : ",msg);
       if(msg.deletedCount === 1)
       {
         res.send("Deleted successefuly !")
@@ -112,7 +111,21 @@ app.route("/skill/:id")
   }).catch(err=>{
      res.send("delete error");
   });
-});
+})
+.patch((req, res)=>{
+  const id = req.params.id;
+  const update = req.body
+
+  Skill.findByIdAndUpdate({_id : id}, update).then(res=>{
+    res.send("UPDATED SUCCESSFULY ! THANKS")
+    console.log(res);
+  }).catch(err=>{
+    console.log(err);
+  })
+
+ 
+  
+})
 
 //SEND EMAIL
 app.route("/contact")
@@ -173,7 +186,6 @@ app.route("/portfolio/:id")
   const id = req.params.id;
 
   Portfolio.deleteOne({_id : id}).then(msg =>{
-    console.log("==> DELETED : ",msg);
     if(msg.deletedCount === 1)
     {
       res.send("Deleted successefuly !")
@@ -183,14 +195,33 @@ app.route("/portfolio/:id")
   }).catch(err=>{
      res.send("delete error");
   });
-});
+})
+.patch((req, res)=>{
+  const id = req.params.id;
+
+  const update = {
+    title : req.body.title,
+    content : req.body.content,
+    link : req.body.link,
+    image : imageLink,
+  }
+
+  Portfolio.findByIdAndUpdate({_id : id}, update).then(res=>{
+  
+    console.log(res);
+  }).catch(err=>{
+    console.log(err);
+  })
+  res.send("UPDATED SUCCESSFULY ! THANKS")
+ 
+  
+})
 
 //UPLOADS ROUTE
 
 app.route("/upload")
 .post(upload.single('image'),(req, res)=>{
   res.send("file uploaded !");
-  console.log(req.file);
 
 });
 
