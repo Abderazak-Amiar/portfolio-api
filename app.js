@@ -8,6 +8,7 @@ const multer = require("multer");
 const { log } = require('console');
 const sharp = require('sharp');
 const fs = require('fs');
+require('dotenv').config({path: __dirname + '/.env'});
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -402,5 +403,6 @@ const imageToDelete = __dirname+'/public/uploads/temp_images/'+imageLink;
 app.listen(5000, function() {
 
   log("Server started on port 5000");
+  log(process.env.NODE_ENV);
   
 });
