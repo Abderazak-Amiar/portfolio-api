@@ -23,7 +23,7 @@ app.use(express.static("public"));
 
 app.use(cors({
 
-   origin: ['https://abderazakamiar.com','https://www.abderazakamiar.com']
+   origin: ['https://abderazakamiar.com','https://www.abderazakamiar.com', 'http://localhost:3000']
    
 }));
 
@@ -398,9 +398,21 @@ const imageToDelete = __dirname+'/public/uploads/temp_images/'+imageLink;
 
 
 
+if(process.env.NODE_ENV === "prod"){
+  app.listen(5000, function() {
 
-app.listen(5000, function() {
+    log("Server started on port 5000");
+    
+  });
 
-  log("Server started on port 5000");
-  
-});
+}else if(process.env.NODE_ENV === "dev"){
+  app.listen(3001, function() {
+
+    log("Server started on port 3001");
+    
+  });
+
+}
+
+
+
