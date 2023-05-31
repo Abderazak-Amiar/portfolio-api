@@ -24,7 +24,7 @@ app.use(express.static("public"));
 
 app.use(cors({
 
-   origin: ['https://abderazakamiar.com','https://www.abderazakamiar.com', 'http://localhost:3000']
+   origin: ['https://abderazakamiar.com']
    
 }));
 
@@ -412,11 +412,6 @@ if(process.env.NODE_ENV === "prod"){
     log("Server started on port 3001");
     
   });
-
 }
 
-  log("Server started on port 5000");
-  log(process.env.NODE_ENV);
-  
-});
 
