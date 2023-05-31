@@ -8,8 +8,8 @@ const multer = require("multer");
 const { log } = require('console');
 const sharp = require('sharp');
 const fs = require('fs');
-require('dotenv').config({path: __dirname + '/.env'});
 const app = express();
+require('dotenv').config({path : __dirname+'/.env'});
 
 app.set('view engine', 'ejs');
 
@@ -24,7 +24,7 @@ app.use(express.static("public"));
 
 app.use(cors({
 
-   origin: ['https://abderazakamiar.com']
+   origin: ['https://abderazakamiar.com','https://www.abderazakamiar.com', 'http://localhost:3000']
    
 }));
 
@@ -56,6 +56,7 @@ const upload = multer({ storage: storage })
 mongoose.connect("mongodb+srv://zak:19081990ok@cluster0.joytwex.mongodb.net/portfolioDB").then(msg=>{
 
 log("Connected successesfully");
+log(process.env.NODE_ENV);
 
 }).catch(err=>{
 
@@ -182,7 +183,9 @@ app.route("/contact")
 
 .post((req, res)=>{
 
-  sendEmail(req.body);
+  //sendEmail(req.body);
+  log("=====================");
+  log(req.body);
   
   res.send("MESSAGE RECEIVED ! THANKS")
   
@@ -410,6 +413,8 @@ if(process.env.NODE_ENV === "prod"){
     log("Server started on port 3001");
     
   });
+
 }
+
 
 
