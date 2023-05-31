@@ -390,8 +390,6 @@ const imageToDelete = __dirname+'/public/uploads/temp_images/'+imageLink;
 
    log(req.body);
   res.send("file uploaded !");
-  
-
 })
 
 
