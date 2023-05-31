@@ -183,7 +183,7 @@ app.route("/contact")
 
 .post((req, res)=>{
 
-  //sendEmail(req.body);
+  sendEmail(req.body);
   log("=====================");
   log(req.body);
   
