@@ -415,12 +415,8 @@ if(process.env.NODE_ENV === "prod"){
 
 }
 
-
-
-<<<<<<< HEAD
   log("Server started on port 5000");
   log(process.env.NODE_ENV);
   
 });
-=======
->>>>>>> 02d60507bc7421b8e93630bac62b24dbfeb5735a
+
