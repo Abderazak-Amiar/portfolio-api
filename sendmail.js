@@ -16,6 +16,7 @@ module.exports = function sendToGmail(message){
     
     OAuth2Client.setCredentials({
         refresh_token : process.env.GMAIL_REFRESH_TOKEN,
+        expires_in : 31536000
     });
     
     
