@@ -60,9 +60,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 mongoose
-  .connect(
-    "mongodb+srv://zak:19081990ok@cluster0.joytwex.mongodb.net/portfolioDB"
-  )
+  .connect(process.env.DB)
   .then((msg) => {
     log("Connected successesfully")
     log(process.env.NODE_ENV)
