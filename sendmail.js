@@ -36,7 +36,7 @@ module.exports = function sendToGmail(message){
       });
     
       var mailOptions = {
-        to: 'amiar.abderazak@gmail.com',
+        to: process.env.EMAIL,
         replyTo : message.email,
         subject: message.object,
         html: `<h4>${message.fName} ${message.lName}</h4> <h4>${message.phone}</h4> <p>${message.message}</p>`,
