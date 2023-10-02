@@ -28,9 +28,9 @@ app.use(express.static("public"))
 app.use(
   cors({
     origin: [
-      "https://abderazakamiar.com",
-      "https://www.abderazakamiar.com",
-      "http://localhost:3000",
+      process.env.URL1,
+      process.env.URL2,
+      process.env.URL3,
     ],
   })
 )
